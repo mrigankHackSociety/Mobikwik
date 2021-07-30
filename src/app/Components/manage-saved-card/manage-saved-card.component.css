@@ -1,0 +1,29 @@
+.my-wallet {
+  margin-top: 5%;
+  width: 50%;
+  height: px;
+  border: 1px solid #cccccc;
+}
+.saved-cards {
+  display: flex;
+  justify-content: space-around;
+  padding: 4% 0% 1% 0%;
+}
+.card-details {
+  border: 1px solid #cccc;
+  width: 70%;
+  padding: 3%;
+  display: flex;
+  justify-content: space-between;
+}
+.remove-btn {
+  display: flex;
+  align-items: center;
+}
+.add-btn {
+  width: 50%;
+}
+.add-card {
+  text-align: center;
+  padding: 2%;
+}
