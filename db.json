@@ -1,0 +1,13 @@
+{
+  "cards": [
+    {
+      "id": 1,
+      "cardNumber": "4111111111111111",
+      "cardType": "debit",
+      "cardNetwork": "visa",
+      "cardUserName": "Mrigank Chaurasia",
+      "cardExpiryMonth": "09",
+      "cardExpiryYear": "24"
+    }
+  ]
+}
