@@ -1,18 +1,27 @@
 <div class="center my-wallet">
-  <div *ngIf="savedCards$ | async as userSavedCards; else loading">
-    <ng-container *ngIf="userSavedCards.length > 0; else noCardFound">
-      <div *ngFor="let card of userSavedCards" class="saved-cards">
+  <div *ngIf="savedCards$ | async as userSavedCardList; else loading">
+    <ng-container *ngIf="userSavedCardList.length > 0; else noCardFound">
+      <div
+        *ngFor="let card of userSavedCardList; trackBy: trackByCardId"
+        class="saved-cards"
+      >
         <div class="card-details">
           <div>
-            <div>{{ card.cardType | titlecase }} Card Number</div>
-            <div>{{ card.cardNumber | maskcard }}</div>
+            <div>Debit Card Number</div>
+            <div>{{ card?.cardNumber | maskcard }}</div>
           </div>
           <div>
-            {{ card.cardNetwork | titlecase }}
+            {{ card?.cardNetwork | titlecase }}
           </div>
         </div>
         <div class="remove-btn">
-          <button mat-stroked-button color="primary">Remove</button>
+          <button
+            mat-stroked-button
+            color="primary"
+            (click)="openRemoveCardDialog(card)"
+          >
+            Remove
+          </button>
         </div>
       </div>
     </ng-container>
@@ -24,7 +33,12 @@
     <mat-spinner class="center"></mat-spinner>
   </ng-template>
   <div class="add-card">
-    <button mat-raised-button color="primary" class="add-btn">
+    <button
+      mat-raised-button
+      color="primary"
+      class="add-btn"
+      (click)="openAddNewCardDialog()"
+    >
       Add New Card
     </button>
   </div>

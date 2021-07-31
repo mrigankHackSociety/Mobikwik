@@ -1,0 +1,13 @@
+.input-box-width {
+  width: 32%;
+}
+.input-group {
+  display: flex;
+  justify-content: space-between;
+}
+.add-btn {
+  float: left;
+}
+i {
+  float: right;
+}
