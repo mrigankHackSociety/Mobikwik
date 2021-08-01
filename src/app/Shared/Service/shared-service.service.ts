@@ -4,7 +4,7 @@ import { StepRange } from '../Models/step-range';
 @Injectable({
   providedIn: 'root',
 })
-export class SharedServiceService {
+export class SharedService {
   constructor() {}
 
   // return an array of string for dropdown in card form

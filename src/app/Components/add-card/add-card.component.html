@@ -1,3 +1,10 @@
+<div>
+  <i
+    class="fa fa-times close-icon cursor"
+    aria-hidden="true"
+    (click)="dialogRef.close()"
+  ></i>
+</div>
 <h4>Add New Card</h4>
 <div
   class="align-text-center"
@@ -14,6 +21,7 @@
         formControlName="cardNumber"
         card-input
         maxlength="25"
+        autocomplete="off"
       />
       <i
         [ngClass]="

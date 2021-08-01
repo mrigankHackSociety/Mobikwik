@@ -1,7 +1,7 @@
 import { SavedCard } from './../../Models/SavedCard.model';
 import { appContants } from 'src/app/Constants/app-constants';
 import { SavedCardService } from './../../Services/saved-card.service';
-import { SharedServiceService } from './../../Shared/Service/shared-service.service';
+import { SharedService } from './../../Shared/Service/shared-service.service';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -27,7 +27,7 @@ export class AddCardComponent implements OnInit, OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<AddCardComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    private sharedService: SharedServiceService,
+    private sharedService: SharedService,
     private savedCardService: SavedCardService
   ) {
     this.cardFormSubscription = new Subscription();

@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AddCardComponent } from './Components/add-card/add-card.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,12 +20,14 @@ import { RemoveCardComponent } from './Components/remove-card/remove-card.compon
 import { ErrorInterceptor } from './Interceptor/error.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedModule } from './Shared/shared.module';
+import { ResourceNotFoundComponent } from './Components/resource-not-found/resource-not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
     ManageSavedCardComponent,
     AddCardComponent,
     RemoveCardComponent,
+    ResourceNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { SharedModule } from './Shared/shared.module';
     FontAwesomeModule,
     MatSnackBarModule,
     SharedModule,
+    MatIconModule,
   ],
   providers: [
     {

@@ -40,25 +40,29 @@ export class ManageSavedCardComponent implements OnInit {
       width: '500px',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      result && this.getAllSavedCards();
-      this.snackBar.open('Card Saved Successfully', 'OK', {
-        duration: appContants.snackBarDuration,
-      });
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.getAllSavedCards();
+        this.snackBar.open('Card Saved Successfully', 'OK', {
+          duration: appContants.snackBarDuration,
+        });
+      }
     });
   }
 
   openRemoveCardDialog(selectedCardDetails: SavedCard): void {
     const dialogRef = this.dialog.open(RemoveCardComponent, {
-      width: '350px',
+      width: '400px',
       data: selectedCardDetails?.id,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      result && this.getAllSavedCards();
-      this.snackBar.open('Card Removed Successfully', 'OK', {
-        duration: appContants.snackBarDuration,
-      });
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.getAllSavedCards();
+        this.snackBar.open('Card Removed Successfully', 'OK', {
+          duration: appContants.snackBarDuration,
+        });
+      }
     });
   }
 }

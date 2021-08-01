@@ -5,7 +5,7 @@ export class SavedCard implements Deserializable {
     public cardNumber: string;
     public cardNetwork: string;
     public cardExpiryMonth: string;
-    public cardExpiryYear: number;
+    public cardExpiryYear: string;
 
   deserialize(input: any): this {
       Object.assign(this, input);
