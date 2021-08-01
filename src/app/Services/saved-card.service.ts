@@ -21,10 +21,7 @@ export class SavedCardService {
   }
 
   saveNewCard(cardDetails: SavedCard): Observable<SavedCard> {
-    const headers = new HttpHeaders().set('content-type', 'application/json');
-    return this.http.post<SavedCard>(`${this.apiEndPoint}`, cardDetails, {
-      headers,
-    });
+    return this.http.post<SavedCard>(`${this.apiEndPoint}`, cardDetails);
   }
 
   removeCard(cardId: number): Observable<any> {
