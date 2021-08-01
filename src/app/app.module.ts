@@ -1,4 +1,4 @@
-import { ContentTypeInterceptor } from './interceptor/content-type.interceptor';
+import { ContentTypeInterceptor } from './Interceptor/content-type.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -16,7 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RemoveCardComponent } from './Components/remove-card/remove-card.component';
-import { ErrorInterceptor } from './interceptor/error.interceptor';
+import { ErrorInterceptor } from './Interceptor/error.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedModule } from './Shared/shared.module';
 @NgModule({
