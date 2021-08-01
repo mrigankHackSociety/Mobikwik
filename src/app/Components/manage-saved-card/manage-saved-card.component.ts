@@ -6,6 +6,7 @@ import { SavedCard } from 'src/app/Models/SavedCard.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCardComponent } from '../add-card/add-card.component';
 import { RemoveCardComponent } from '../remove-card/remove-card.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-manage-saved-card',
@@ -18,7 +19,8 @@ export class ManageSavedCardComponent implements OnInit {
 
   constructor(
     private savedCardService: SavedCardService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -30,7 +32,7 @@ export class ManageSavedCardComponent implements OnInit {
   }
 
   trackByCardId(index: number, cardDetails: SavedCard): number {
-    return cardDetails?.id;
+    return cardDetails.id!;
   }
 
   openAddNewCardDialog(): void {
@@ -40,6 +42,9 @@ export class ManageSavedCardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       result && this.getAllSavedCards();
+      this.snackBar.open('Card Saved Successfully', 'OK', {
+        duration: appContants.snackBarDuration,
+      });
     });
   }
 
@@ -51,6 +56,9 @@ export class ManageSavedCardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       result && this.getAllSavedCards();
+      this.snackBar.open('Card Removed Successfully', 'OK', {
+        duration: appContants.snackBarDuration,
+      });
     });
   }
 }

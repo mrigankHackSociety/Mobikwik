@@ -7,6 +7,7 @@ import { StepRange } from '../Models/step-range';
 export class SharedServiceService {
   constructor() {}
 
+  // return an array of string for dropdown in card form
   numberRange(stepRangeDetails): string[] {
     const {
       startRange,

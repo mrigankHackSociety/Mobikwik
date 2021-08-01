@@ -6,5 +6,6 @@ export const appContants = {
   cvvRegex: /^[0-9]{3,4}$/,
   spaceAfterFourthCharRegex: /(.{4})/g,
   avoidAlphabet: /[^\dA-Z]/,
-  spninnerDiameter: '40'
+  spninnerDiameter: '40',
+  snackBarDuration: 3000
 };

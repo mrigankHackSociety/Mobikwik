@@ -1,8 +1,8 @@
 import { SavedCard } from 'src/app/Models/SavedCard.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,9 +15,12 @@ export class SavedCardService {
   }
 
   getSavedCards(): Observable<SavedCard[]> {
-    return this.http
-      .get<SavedCard[]>(`${this.apiEndPoint}`)
-      .pipe(map((data) => data.map((res) => new SavedCard().deserialize(res))));
+    return this.http.get<SavedCard[]>(`${this.apiEndPoint}`).pipe(
+      map((data) => data.map((res) => new SavedCard().deserialize(res))),
+      catchError((err) => {
+        return of([]);
+      })
+    );
   }
 
   saveNewCard(cardDetails: SavedCard): Observable<SavedCard> {

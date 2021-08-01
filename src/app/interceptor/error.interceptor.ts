@@ -1,3 +1,4 @@
+import { appContants } from 'src/app/Constants/app-constants';
 import { Injectable } from '@angular/core';
 import {
   HttpEvent,
@@ -20,7 +21,9 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.snackBar.open('Something Went Wrong Please try again after some time!', 'OK');
+        this.snackBar.open('Something Went Wrong Please try again after some time!', 'OK', {
+          duration: appContants.snackBarDuration
+        });
         return throwError(error.message);
       })
     );

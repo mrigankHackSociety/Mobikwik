@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
-  margin-bottom: 3px;
+  margin-bottom: 12px;
 }
 .add-btn {
   float: left;

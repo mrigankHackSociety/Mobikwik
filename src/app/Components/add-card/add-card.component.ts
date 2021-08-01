@@ -1,3 +1,4 @@
+import { SavedCard } from './../../Models/SavedCard.model';
 import { appContants } from 'src/app/Constants/app-constants';
 import { SavedCardService } from './../../Services/saved-card.service';
 import { SharedServiceService } from './../../Shared/Service/shared-service.service';
@@ -7,7 +8,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ValidateCvvNumber } from 'src/app/Shared/Custom Validators/cvv-validator.validator';
 import { ValidateCardNumber } from 'src/app/Shared/Custom Validators/card-validator.validator';
-import { SavedCard } from 'src/app/Models/SavedCard.model';
 import { distinctUntilChanged, finalize } from 'rxjs/operators';
 
 @Component({
@@ -52,6 +52,7 @@ export class AddCardComponent implements OnInit, OnDestroy {
     this.cardFormSubscription.unsubscribe();
   }
 
+  // creates form group and add controls to object to avoid lookup and for reference
   initialiseCardFormAndControls(): void {
     this.addNewCardForm = new FormGroup({
       cardNumber: new FormControl('', [
