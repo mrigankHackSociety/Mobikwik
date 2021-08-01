@@ -1,7 +1,5 @@
 .my-wallet {
-  margin-top: 5%;
   width: 50%;
-  height: px;
   border: 1px solid #cccccc;
 }
 .saved-cards {
@@ -21,8 +19,19 @@
   align-items: center;
 }
 .add-btn {
-  width: 50%;
+  width: 30%;
 }
 .add-card {
   padding: 3%;
+}
+.card-number {
+  font-weight: bold;
+}
+i {
+  font-size: 20px;
+}
+.wallet-heading {
+  margin-left: 25%;
+  padding-top: 50px;
+  margin-bottom: 0px;
 }

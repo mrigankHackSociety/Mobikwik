@@ -1,3 +1,4 @@
+import { appContants } from 'src/app/Constants/app-constants';
 import { SavedCardService } from './../../Services/saved-card.service';
 import { SharedServiceService } from './../../Shared/Service/shared-service.service';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
@@ -7,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { ValidateCvvNumber } from 'src/app/Shared/Custom Validators/cvv-validator.validator';
 import { ValidateCardNumber } from 'src/app/Shared/Custom Validators/card-validator.validator';
 import { SavedCard } from 'src/app/Models/SavedCard.model';
+import { distinctUntilChanged, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-card',
@@ -20,6 +22,7 @@ export class AddCardComponent implements OnInit, OnDestroy {
   cardFormControlObj: any = {};
   cardFormSubscription: Subscription;
   displayLoader: boolean = false;
+  spinnerDiameter: string = appContants.spninnerDiameter;
 
   constructor(
     public dialogRef: MatDialogRef<AddCardComponent>,
@@ -33,9 +36,16 @@ export class AddCardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initialiseCardFormAndControls();
     this.checkCardNetworkOnUserInput();
-    this.expiryMonthArray = this.sharedService.numberRange(1, 12, 1, true);
+    this.expiryMonthArray = this.sharedService.numberRange({
+      startRange: 1,
+      endRange: 12,
+      addZero: true,
+    });
     this.expiryYearArray = this.sharedService
-      .numberRange(2010, 2025)
+      .numberRange({
+        startRange: 2010,
+        endRange: 2025,
+      })
       .filter((item) => new Date().getFullYear() <= +item);
   }
   ngOnDestroy(): void {
@@ -60,10 +70,14 @@ export class AddCardComponent implements OnInit, OnDestroy {
 
   checkCardNetworkOnUserInput(): void {
     this.cardFormSubscription.add(
-      this.addNewCardForm.get('cardNumber')?.valueChanges.subscribe((res) => {
-        const userCardNetwork = this.sharedService.getCardNetwork(res);
-        this.addNewCardForm.patchValue({ cardNetwork: userCardNetwork });
-      })
+      this.addNewCardForm
+        .get('cardNumber')
+        ?.valueChanges.pipe(distinctUntilChanged())
+        .subscribe((res) => {
+          this.addNewCardForm.patchValue({
+            cardNetwork: this.sharedService.getCardNetwork(res),
+          });
+        })
     );
   }
 
@@ -81,13 +95,10 @@ export class AddCardComponent implements OnInit, OnDestroy {
       this.cardFormSubscription.add(
         this.savedCardService
           .saveNewCard(newCardPayload as SavedCard)
+          .pipe(finalize(() => (this.displayLoader = false)))
           .subscribe((res) => {
             if (res) {
-              this.displayLoader = false;
-              this.addNewCardForm.reset();
               this.dialogRef.close(true);
-            } else {
-              this.displayLoader = false;
             }
           })
       );

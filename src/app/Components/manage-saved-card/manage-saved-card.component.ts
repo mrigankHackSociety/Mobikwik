@@ -1,3 +1,4 @@
+import { appContants } from 'src/app/Constants/app-constants';
 import { SavedCardService } from './../../Services/saved-card.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -13,6 +14,7 @@ import { RemoveCardComponent } from '../remove-card/remove-card.component';
 })
 export class ManageSavedCardComponent implements OnInit {
   savedCards$: Observable<SavedCard[]>;
+  spinnerDiameter: string = appContants.spninnerDiameter;
 
   constructor(
     private savedCardService: SavedCardService,
@@ -28,12 +30,12 @@ export class ManageSavedCardComponent implements OnInit {
   }
 
   trackByCardId(index: number, cardDetails: SavedCard): number {
-    return cardDetails.id;
+    return cardDetails?.id;
   }
 
   openAddNewCardDialog(): void {
     const dialogRef = this.dialog.open(AddCardComponent, {
-      width: '600px',
+      width: '500px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -41,10 +43,10 @@ export class ManageSavedCardComponent implements OnInit {
     });
   }
 
-  openRemoveCardDialog(cardDetails: SavedCard): void {
+  openRemoveCardDialog(selectedCardDetails: SavedCard): void {
     const dialogRef = this.dialog.open(RemoveCardComponent, {
-      width: '400px',
-      data: cardDetails.id,
+      width: '350px',
+      data: selectedCardDetails?.id,
     });
 
     dialogRef.afterClosed().subscribe((result) => {

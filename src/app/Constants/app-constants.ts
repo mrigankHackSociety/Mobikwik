@@ -4,4 +4,7 @@ export const appContants = {
   masterCardRegex2: /^2[2-7][0-9]{14}$/,
   amexCardRegex: /^3[47][0-9]{13}$/,
   cvvRegex: /^[0-9]{3,4}$/,
+  spaceAfterFourthCharRegex: /(.{4})/g,
+  avoidAlphabet: /[^\dA-Z]/,
+  spninnerDiameter: '40'
 };

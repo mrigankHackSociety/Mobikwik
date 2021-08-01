@@ -1,3 +1,7 @@
-.margin-btn {
-  margin-right: 15px;
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+}
+.button-width {
+  width: 45%;
 }

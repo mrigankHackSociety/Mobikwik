@@ -1,9 +1,10 @@
+import { appContants } from './../../Constants/app-constants';
 import { Directive, HostListener, ElementRef } from '@angular/core';
 
 @Directive({
   selector: '[card-input]',
 })
-export class CreditCardDirective {
+export class PaymentCardDirective {
   constructor(private elementRef: ElementRef) {}
 
   @HostListener('input', ['$event'])
@@ -11,8 +12,8 @@ export class CreditCardDirective {
     this.elementRef.nativeElement.value = (
       event.target as HTMLInputElement
     ).value
-      .replace(/[^\dA-Z]/g, '')
-      .replace(/(.{4})/g, '$1 ')
+      .replace(new RegExp(appContants.avoidAlphabet, 'g'), '')
+      .replace(new RegExp(appContants.spaceAfterFourthCharRegex, 'g'), '$& ')
       .trim();
   }
 }

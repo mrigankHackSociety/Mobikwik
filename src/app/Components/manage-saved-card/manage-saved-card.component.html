@@ -1,3 +1,4 @@
+<h4 class="wallet-heading">My Wallet</h4>
 <div class="center my-wallet">
   <div *ngIf="savedCards$ | async as userSavedCardList; else loading">
     <ng-container *ngIf="userSavedCardList.length > 0; else noCardFound">
@@ -8,10 +9,20 @@
         <div class="card-details">
           <div>
             <div>Debit Card Number</div>
-            <div>{{ card?.cardNumber | maskcard }}</div>
+            <div class="card-number">{{ card?.cardNumber | maskcard }}</div>
           </div>
           <div>
-            {{ card?.cardNetwork | titlecase }}
+            <i
+              [ngClass]="
+                card?.cardNetwork === 'Visa'
+                  ? 'fa fa-cc-visa'
+                  : card?.cardNetwork === 'Mastercard'
+                  ? 'fa fa-cc-mastercard'
+                  : card?.cardNetwork === 'Amex'
+                  ? 'fa fa-cc-amex'
+                  : ''
+              "
+            ></i>
           </div>
         </div>
         <div class="remove-btn">
@@ -30,7 +41,7 @@
     </ng-template>
   </div>
   <ng-template #loading>
-    <mat-spinner class="center"></mat-spinner>
+    <mat-spinner class="center" [diameter]="spinnerDiameter"></mat-spinner>
   </ng-template>
   <div class="add-card">
     <button

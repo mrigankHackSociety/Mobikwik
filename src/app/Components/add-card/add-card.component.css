@@ -4,10 +4,16 @@
 .input-group {
   display: flex;
   justify-content: space-between;
+  margin-top: 5px;
+  margin-bottom: 3px;
 }
 .add-btn {
   float: left;
 }
+.input-field {
+  display: flex;
+  align-items: baseline;
+}
 i {
-  float: right;
+  font-size: 18px;
 }

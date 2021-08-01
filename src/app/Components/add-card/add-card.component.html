@@ -1,6 +1,20 @@
-  <div class="align-text-center" [formGroup]="addNewCardForm" *ngIf="!displayLoader; else loading">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Add Debit / Credit Card Number</mat-label>
+<h4>Add New Card</h4>
+<div
+  class="align-text-center"
+  [formGroup]="addNewCardForm"
+  *ngIf="!displayLoader; else loading"
+>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Add Debit / Credit Card Number</mat-label>
+    <span class="input-field">
+      <input
+        matInput
+        type="text"
+        placeholder="Add Debit / Credit Card Number"
+        formControlName="cardNumber"
+        card-input
+        maxlength="25"
+      />
       <i
         [ngClass]="
           cardFormControlObj.cardNetwork.value === 'Visa'
@@ -12,83 +26,80 @@
             : ''
         "
       ></i>
+    </span>
+    <mat-error
+      *ngIf="
+        cardFormControlObj.cardNumber.touched &&
+        cardFormControlObj.cardNumber.hasError('required')
+      "
+      >Card Number is required</mat-error
+    >
+    <mat-error *ngIf="cardFormControlObj.cardNumber.hasError('invalidCard')"
+      >This Card is Invalid. Please Check Again!</mat-error
+    >
+  </mat-form-field>
+  <div class="input-group">
+    <mat-form-field appearance="outline" class="input-box-width">
+      <mat-label>Expiry Month</mat-label>
+      <mat-select formControlName="cardExpiryMonth">
+        <mat-option *ngFor="let month of expiryMonthArray" [value]="month">
+          {{ month }}</mat-option
+        >
+      </mat-select>
+      <mat-error
+        *ngIf="
+          cardFormControlObj.cardExpiryMonth.touched &&
+          cardFormControlObj.cardExpiryMonth.hasError('required')
+        "
+        >Card Expiry Month is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="input-box-width">
+      <mat-label>Expiry Year</mat-label>
+      <mat-select formControlName="cardExpiryYear">
+        <mat-option *ngFor="let year of expiryYearArray" [value]="year">
+          {{ year }}</mat-option
+        >
+      </mat-select>
+      <mat-error
+        *ngIf="
+          cardFormControlObj.cardExpiryYear.touched &&
+          cardFormControlObj.cardExpiryYear.hasError('required')
+        "
+        >Card Expiry Year is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="input-box-width">
+      <mat-label>CVV</mat-label>
       <input
         matInput
-        type="text"
-        placeholder="Add Debit / Credit Card Number"
-        formControlName="cardNumber"
-        card-input
-        maxlength="19"
+        type="password"
+        placeholder="CVV"
+        formControlName="cvvNumber"
+        maxlength="4"
       />
       <mat-error
         *ngIf="
-          cardFormControlObj.cardNumber.touched &&
-          cardFormControlObj.cardNumber.hasError('required')
+          cardFormControlObj.cvvNumber.touched &&
+          cardFormControlObj.cvvNumber.hasError('required')
         "
-        >Card Number is required</mat-error
+        >Card CVV is required</mat-error
       >
-      <mat-error *ngIf="cardFormControlObj.cardNumber.hasError('invalidCard')">Your Card is Invalid Please Check Again!</mat-error>
+      <mat-error *ngIf="cardFormControlObj.cvvNumber.hasError('invalidCvv')"
+        >Invalid CVV Number</mat-error
+      >
     </mat-form-field>
-    <div class="input-group">
-      <mat-form-field appearance="outline" class="input-box-width">
-        <mat-label>Expiry Month</mat-label>
-        <mat-select formControlName="cardExpiryMonth" >
-          <mat-option *ngFor="let month of expiryMonthArray" [value]="month">
-            {{ month }}</mat-option
-          >
-        </mat-select>
-        <mat-error
-          *ngIf="
-            cardFormControlObj.cardExpiryMonth.touched &&
-            cardFormControlObj.cardExpiryMonth.hasError('required')
-          "
-          >Card Expiry Month is required</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="input-box-width">
-        <mat-label>Expiry Year</mat-label>
-        <mat-select formControlName="cardExpiryYear">
-          <mat-option *ngFor="let year of expiryYearArray" [value]="year">
-            {{ year }}</mat-option
-          >
-        </mat-select>
-        <mat-error
-          *ngIf="
-            cardFormControlObj.cardExpiryYear.touched &&
-            cardFormControlObj.cardExpiryYear.hasError('required')
-          "
-          >Card Expiry Year is required</mat-error
-        >
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="input-box-width">
-        <mat-label>CVV</mat-label>
-        <input
-          matInput
-          type="password"
-          placeholder="CVV"
-          formControlName="cvvNumber"
-          maxlength="4"
-        />
-        <mat-error
-          *ngIf="
-            cardFormControlObj.cvvNumber.touched &&
-            cardFormControlObj.cvvNumber.hasError('required')
-          "
-          >Card CVV is required</mat-error
-        >
-        <mat-error *ngIf="cardFormControlObj.cvvNumber.hasError('invalidCvv')">Invalid CVV Number</mat-error>
-      </mat-form-field>
-    </div>
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="addNewCardForm.invalid"
-      class="add-btn input-box-width"
-      (click)="addNewCard()"
-    >
-      Add Card
-    </button>
   </div>
-  <ng-template #loading>
-    <mat-spinner class="center"></mat-spinner>
-  </ng-template>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="addNewCardForm.invalid"
+    class="add-btn input-box-width"
+    (click)="addNewCard()"
+  >
+    Add Card
+  </button>
+</div>
+<ng-template #loading>
+  <mat-spinner class="center" [diameter]="spinnerDiameter"></mat-spinner>
+</ng-template>
