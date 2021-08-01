@@ -1,7 +1,7 @@
 .btn-group {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .button-width {
-  width: 45%;
+  width: 40%;
 }

@@ -6,6 +6,20 @@
       "cardExpiryMonth": "02",
       "cardExpiryYear": "2023",
       "id": 1
+    },
+    {
+      "cardNumber": "5129 4444 4444 5441",
+      "cardNetwork": "Mastercard",
+      "cardExpiryMonth": "06",
+      "cardExpiryYear": "2023",
+      "id": 3
+    },
+    {
+      "cardNumber": "4143 3333 3333 2305",
+      "cardNetwork": "Visa",
+      "cardExpiryMonth": "04",
+      "cardExpiryYear": "2024",
+      "id": 4
     }
   ]
 }
